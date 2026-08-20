@@ -2,8 +2,11 @@ export type QuoteStatus =
   | "Draft"
   | "Sent"
   | "Accepted"
+  | "Pending"
+  | "Paid"
   | "Rejected"
-  | "Expired";
+  | "Expired"
+  | "Overdue";
 
 export type ProductStatus = "Active" | "Low Stock" | "Draft" | "Inactive";
 

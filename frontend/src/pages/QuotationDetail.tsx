@@ -16,7 +16,7 @@ import { Badge } from "../Components/ui/Badge";
 export const QuotationDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { quotes, updateQuote, updateQuoteStatus, user, showToast } = useApp();
+  const { quotes, updateQuoteStatus, user, showToast } = useApp();
   console.log("Quotation Detail User:", user);
   const [emailModalOpen, setEmailModalOpen] = useState(false);
   const [emailRecipient, setEmailRecipient] = useState("");

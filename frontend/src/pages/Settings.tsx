@@ -17,7 +17,7 @@ export const Settings: React.FC = () => {
   // Profile Information State
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  // const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -72,7 +72,7 @@ export const Settings: React.FC = () => {
       return rest;
     });
 
-    setSelectedFile(file);
+    // setSelectedFile(file);
 
     // Create immediate image preview
     const reader = new FileReader();
@@ -86,7 +86,7 @@ export const Settings: React.FC = () => {
 
   // Remove Photo Action
   const handleRemovePhoto = () => {
-    setSelectedFile(null);
+    // setSelectedFile(null);
     setAvatarPreview("");
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -105,7 +105,7 @@ export const Settings: React.FC = () => {
     setTaxId(user?.taxId || "");
     setAddress(user?.address || "");
     setAvatarPreview('');
-    setSelectedFile(null);
+    // setSelectedFile(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }

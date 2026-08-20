@@ -120,14 +120,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   // Helper mapper from MongoDB _id to id
-  const mapMongoId = (item: any) => {
-    if (!item) return item;
-    const { _id, ...rest } = item;
-    return {
-      id: _id ? String(_id) : item.id || `id-${Math.random()}`,
-      ...rest,
-    };
-  };
+  // const mapMongoId = (item: any) => {
+  //   if (!item) return item;
+  //   const { _id, ...rest } = item;
+  //   return {
+  //     id: _id ? String(_id) : item.id || `id-${Math.random()}`,
+  //     ...rest,
+  //   };
+  // };
 
   // Check health and fetch MongoDB data
   const fetchDataFromApi = async () => {

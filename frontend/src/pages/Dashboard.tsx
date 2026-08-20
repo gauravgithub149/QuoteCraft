@@ -6,7 +6,6 @@ import {
   UserPlus,
   Clock,
   Plus,
-  ArrowUpRight,
   ChevronRight,
   Building2,
   Eye,
@@ -24,19 +23,6 @@ import {
 import { useApp } from '../Context/AppContext';
 import { Badge } from '../Components/ui/Badge';
 
-const revenueData = [
-  { name: 'Jan 01', revenue: 12000 },
-  { name: 'Jan 08', revenue: 18500 },
-  { name: 'Jan 15', revenue: 24000 },
-  { name: 'Jan 22', revenue: 32000 },
-  { name: 'Jan 29', revenue: 28000 },
-  { name: 'Feb 05', revenue: 41000 },
-  { name: 'Feb 12', revenue: 52000 },
-  { name: 'Feb 19', revenue: 64000 },
-  { name: 'Feb 26', revenue: 78000 },
-  { name: 'Mar 05', revenue: 95000 },
-  { name: 'Mar 12', revenue: 124500 },
-];
 
 export const Dashboard: React.FC = () => {
   const { user, quotes, customers, searchQuery } = useApp();

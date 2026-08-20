@@ -9,8 +9,6 @@ import { useAuth } from "../../Context/AuthContext";
 
 export const AppLayout: React.FC = () => {
   const {
-    user,
-    logout,
     isAuthenticated,
     loading,
   } = useAuth();

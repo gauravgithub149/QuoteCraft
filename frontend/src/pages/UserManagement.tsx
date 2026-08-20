@@ -40,7 +40,7 @@ export interface StaffUser {
 // Initial Mock Data for UI Preview Fallback
 
 export const UserManagement: React.FC = () => {
-  const { showToast} = useApp();
+  const { showToast } = useApp();
 
   // State Management for Staff Users
   const [staffList, setStaffList] = useState<StaffUser[]>([]);
@@ -128,17 +128,16 @@ export const UserManagement: React.FC = () => {
     });
   }, [staffList, searchQuery, statusFilter, roleFilter]);
 
-
   const formatDateTime = (date: string) => {
-  return new Date(date).toLocaleString("en-IN", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-};
+    return new Date(date).toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
   // Handle Add Staff Submit
   const handleAddStaffSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -173,45 +172,44 @@ export const UserManagement: React.FC = () => {
       return;
     }
 
-   try {
-  const response = await userService.createStaff({
-    name: addForm.name.trim(),
-    email: addForm.email.trim(),
-    password: addForm.password,
-    status: addForm.status,
-  });
+    try {
+      const response = await userService.createStaff({
+        name: addForm.name.trim(),
+        email: addForm.email.trim(),
+        password: addForm.password,
+        status: addForm.status,
+      });
 
-  const createdUser: StaffUser = response.data;
+      const createdUser: StaffUser = response.data;
 
-  setStaffList((prev) => [createdUser, ...prev]);
+      setStaffList((prev) => [createdUser, ...prev]);
 
-  showToast(
-    `Staff member "${createdUser.name}" created successfully.`,
-    "success"
-  );
+      showToast(
+        `Staff member "${createdUser.name}" created successfully.`,
+        "success",
+      );
 
-  // Close ONLY after successful API
-  setIsAddModalOpen(false);
+      // Close ONLY after successful API
+      setIsAddModalOpen(false);
 
-  setAddForm({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    role: "staff",
-    status: "active",
-  });
+      setAddForm({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        role: "staff",
+        status: "active",
+      });
 
-  setAddErrors({});
-} catch (error: any) {
-  showToast(
-    error?.response?.data?.message ||
-      "Failed to create staff member.",
-    "error"
-  );
-} finally {
-  setIsSubmitting(false);
-}
+      setAddErrors({});
+    } catch (error: any) {
+      showToast(
+        error?.response?.data?.message || "Failed to create staff member.",
+        "error",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Open Edit Modal
@@ -264,7 +262,7 @@ export const UserManagement: React.FC = () => {
         "success",
       );
       setEditingStaff(null);
-setEditErrors({});
+      setEditErrors({});
     } catch (error: any) {
       console.error("Update staff error:", error);
 
@@ -281,84 +279,80 @@ setEditErrors({});
 
   // Handle Delete Confirmation
   const handleConfirmDelete = async () => {
-  if (!deletingStaff) return;
+    if (!deletingStaff) return;
 
-  const targetId = deletingStaff.id;
-  const targetName = deletingStaff.name;
+    const targetId = deletingStaff.id;
+    const targetName = deletingStaff.name;
 
-  try {
-    await userService.deleteStaff(targetId);
+    try {
+      await userService.deleteStaff(targetId);
 
-    setStaffList((prev) =>
-      prev.filter((item) => item.id !== targetId)
-    );
+      setStaffList((prev) => prev.filter((item) => item.id !== targetId));
 
-    showToast(
-      `Staff member "${targetName}" deleted successfully.`,
-      "success"
-    );
+      showToast(
+        `Staff member "${targetName}" deleted successfully.`,
+        "success",
+      );
 
-    setDeletingStaff(null);
-  } catch (error: any) {
-    console.error("Delete staff error:", error);
+      setDeletingStaff(null);
+    } catch (error: any) {
+      console.error("Delete staff error:", error);
 
-    showToast(
-      error.response?.data?.message ||
-        error.response?.data?.error ||
-        "Failed to delete staff member.",
-      "error"
-    );
-  }
-};
+      showToast(
+        error.response?.data?.message ||
+          error.response?.data?.error ||
+          "Failed to delete staff member.",
+        "error",
+      );
+    }
+  };
 
   // Handle Activate / Deactivate Toggle
   const handleConfirmStatusToggle = async () => {
-  if (!statusTogglingStaff) return;
+    if (!statusTogglingStaff) return;
 
-  const nextStatus: "active" | "inactive" =
-    statusTogglingStaff.status === "active"
-      ? "inactive"
-      : "active";
+    const nextStatus: "active" | "inactive" =
+      statusTogglingStaff.status === "active" ? "inactive" : "active";
 
-  const targetId = statusTogglingStaff.id;
-  const targetName = statusTogglingStaff.name;
+    const targetId = statusTogglingStaff.id;
+    const targetName = statusTogglingStaff.name;
 
-  try {
-    const response = await userService.updateStaffStatus(
-      targetId,
-      nextStatus
-    );
+    try {
+      const response = await userService.updateStaffStatus(
+        targetId,
+        nextStatus,
+      );
 
-    const updatedUser = response.data;
+      const updatedUser = response.data;
 
-    setStaffList((prev) =>
-      prev.map((item) =>
-        item.id === targetId
-          ? {
-              ...item,
-              status: updatedUser.status,
-            }
-          : item
-      )
-    );
+      setStaffList((prev) =>
+        prev.map((item) =>
+          item.id === targetId
+            ? {
+                ...item,
+                status: updatedUser.status,
+              }
+            : item,
+        ),
+      );
 
-    showToast(
-      `Staff member "${targetName}" is now ${nextStatus}.`,
-      nextStatus === "active" ? "success" : "info"
-    );
+      showToast(
+        `Staff member "${targetName}" is now ${nextStatus}.`,
+        nextStatus === "active" ? "success" : "info",
+      );
 
-    setStatusTogglingStaff(null);
-  } catch (error: any) {
-    console.error("Status update error:", error);
+      setStatusTogglingStaff(null);
+    } catch (error: any) {
+      console.error("Status update error:", error);
 
-    showToast(
-      error.response?.data?.message ||
-        error.response?.data?.error ||
-        "Failed to update staff status.",
-      "error"
-    );
-  }
-};
+      showToast(
+        error.response?.data?.message ||
+          error.response?.data?.error ||
+          "Failed to update staff status.",
+        "error",
+      );
+    }
+  };
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-12">
@@ -491,7 +485,13 @@ setEditErrors({});
 
       {/* User Table */}
       <div className="bg-white rounded-2xl border border-[#e5e7eb] shadow-2xs overflow-hidden">
-        {filteredStaff.length > 0 ? (
+        {isLoading ? (
+          <div className="p-12 text-center">
+            <p className="text-sm font-medium text-[#4d4632]">
+              Loading staff members...
+            </p>
+          </div>
+        ) : filteredStaff.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
@@ -842,6 +842,7 @@ setEditErrors({});
                 </button>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="px-5 py-2 bg-[#facc15] hover:bg-[#facc15]/90 text-[#1f1b11] font-bold text-xs rounded-xl shadow-2xs transition-all"
                 >
                   Create Staff
