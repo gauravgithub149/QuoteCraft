@@ -17,6 +17,7 @@ import { QuotationDetail } from "./pages/QuotationDetail";
 import { QuotationsList } from "./pages/QuotationsList";
 import { Settings } from "./pages/Settings";
 import { UserManagement } from "./pages/UserManagement";
+import { ScrollToTop } from "./Components/common/ScrollToTop";
 
 function GlobalLoadingOverlay() {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +39,7 @@ export default function App() {
 
       <GlobalLoadingOverlay />
       <BrowserRouter>
+      <ScrollToTop />
         <Routes>
           {/* PUBLIC ROUTES */}
           <Route path="/login" element={<Login />} />
