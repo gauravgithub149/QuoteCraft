@@ -1,4 +1,8 @@
 import axios from "axios";
+import {
+  startGlobalLoading,
+  stopGlobalLoading,
+} from "../Utils/loadingManager";
 
 const Api = axios.create({
   baseURL: "https://quotecraft-hlgj.onrender.com/api",
@@ -7,14 +11,44 @@ const Api = axios.create({
   },
 });
 
-Api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("qc_token");
+// ==============================
+// Request Interceptor
+// ==============================
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+Api.interceptors.request.use(
+  (config) => {
+    startGlobalLoading();
 
-  return config;
-});
+    const token = localStorage.getItem("qc_token");
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    stopGlobalLoading();
+
+    return Promise.reject(error);
+  },
+);
+
+// ==============================
+// Response Interceptor
+// ==============================
+
+Api.interceptors.response.use(
+  (response) => {
+    stopGlobalLoading();
+
+    return response;
+  },
+  (error) => {
+    stopGlobalLoading();
+
+    return Promise.reject(error);
+  },
+);
 
 export default Api;
