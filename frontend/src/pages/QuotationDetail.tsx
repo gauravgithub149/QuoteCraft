@@ -45,8 +45,24 @@ export const QuotationDetail: React.FC = () => {
   }
 
   const handlePrint = () => {
-    window.print();
-  };
+  const originalTitle = document.title;
+
+  const customerName =
+    quote.customerCompany?.trim() || quote.customerName?.trim() || "Customer";
+
+  const safeCustomerName = customerName
+    .replace(/[^a-zA-Z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+
+  document.title = `Quote_${quote.quoteNumber}_${safeCustomerName}`;
+
+  window.print();
+
+  setTimeout(() => {
+    document.title = originalTitle;
+  }, 1000);
+};
 
   const openEmailModal = () => {
     setEmailRecipient(quote.customerEmail || "contact@client.com");
