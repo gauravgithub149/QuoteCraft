@@ -30,52 +30,52 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const navigate = useNavigate();
 
   const navItems = [
-  {
-    label: "Dashboard",
-    path: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    label: "Quotations",
-    path: "/quotations",
-    icon: FileText,
-  },
-  {
-    label: "Customers",
-    path: "/customers",
-    icon: Users,
-  },
-  {
-    label: "User Management",
-    path: "/users",
-    icon: Users,
-  },
-  {
-    label: "Products & Services",
-    path: "/products",
-    icon: Package,
-  },
-  {
-    label: "Settings",
-    path: "/settings",
-    icon: Settings,
-  },
-];
+    {
+      label: "Dashboard",
+      path: "/dashboard",
+      icon: LayoutDashboard,
+    },
+    {
+      label: "Quotations",
+      path: "/quotations",
+      icon: FileText,
+    },
+    {
+      label: "Customers",
+      path: "/customers",
+      icon: Users,
+    },
+    {
+      label: "User Management",
+      path: "/users",
+      icon: Users,
+    },
+    {
+      label: "Products & Services",
+      path: "/products",
+      icon: Package,
+    },
+    {
+      label: "Settings",
+      path: "/settings",
+      icon: Settings,
+    },
+  ];
 
   const content = (
     <aside className="h-full w-65 bg-[#fff8f0] text-[#1f1b11] flex flex-col border-r border-[#d1c6ab]/60 select-none no-print">
       {/* Brand Header */}
       <div className="p-5 border-b border-[#d1c6ab]/60 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#facc15] flex items-center justify-center text-[#1f1b11] shadow-sm">
-            <FileText className="w-5 h-5" />
-          </div>
-          <div>
-            <h1 className="font-semibold text-lg leading-tight tracking-tight text-[#1f1b11]">
-              QuoteCraft
-            </h1>
-            <span className="text-xs text-[#4d4632] font-medium">
-              {user.plan || "Enterprise Plan"}
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="min-w-0">
+            <img
+              src="/logotext.png"
+              alt="QuoteCraft"
+              className="w-40 h-auto object-contain"
+            />
+
+            <span className="block mt-1 text-xs text-[#4d4632] font-medium">
+              {user.companyName ? user.companyName : "Your Company Name"} 
             </span>
           </div>
         </div>

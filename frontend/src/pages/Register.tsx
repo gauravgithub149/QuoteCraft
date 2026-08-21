@@ -48,10 +48,11 @@ export const Register: React.FC = () => {
       <div className="w-full max-w-md bg-white rounded-2xl border border-[#e5e7eb] p-8 shadow-xs">
         <div className="flex flex-col items-center mb-6 text-center">
           <h1 className="text-2xl font-bold text-[#1f1b11] tracking-tight">
-            Create MongoDB Account
+            Create Your Account
           </h1>
           <p className="text-xs text-[#4d4632] mt-1">
-            Register to persist quotes in MongoDB Atlas collection.
+            Please fill in the details below to create your account and connect
+            with your company.
           </p>
         </div>
 
